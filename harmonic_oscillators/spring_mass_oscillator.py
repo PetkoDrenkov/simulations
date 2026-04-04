@@ -7,7 +7,7 @@ w = sqrt(k/m) <=> k = m * w**2
 f = m * a = -k * x = - m * w**2 * x <=> a = - x * w**2 
 '''
 
-def mass_on_a_spring(w,x,v=0.):
+def classical_sho(w,x,v=0.):
     dt = 0.01
     x_0 = x
     t_max = 10
