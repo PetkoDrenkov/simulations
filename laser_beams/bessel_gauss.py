@@ -25,5 +25,5 @@ I = np.abs(E)**2
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 ax.plot_surface(X, Y, I, cmap=cm.cividis)
-# fig.savefig(f'bgb_v={v}_r0={r_0}_w0={w_0}.png')
+fig.savefig(f'bgb_v={v}_r0={r_0}_w0={w_0}.png')
 plt.show()
