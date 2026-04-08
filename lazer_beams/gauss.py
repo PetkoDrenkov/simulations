@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 
-x = np.linspace(0,2,100)
 r = np.linspace(0, 2, 100)
 p = np.linspace(0, 2*np.pi, 1000)
 R, P = np.meshgrid(r, p)
