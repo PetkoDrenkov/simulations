@@ -11,4 +11,5 @@ Contains a python file that has a function which simulates and graphs the motion
 In future, models of other oscillators, like SHO with damping and maybe a string pendulum will be added.\
 
 ### laser beams
+In the folder 'pictures', 'bgb' stands for Bessel-Gaussian Beam, 'bb' is for Bessel Beam and 'gb' is for Gaussian Beam. The intensity of the beams is given by the square of the amplitude in arbitrary units (the distribution is what matters).
 
