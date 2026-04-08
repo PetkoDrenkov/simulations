@@ -9,9 +9,10 @@ R, P = np.meshgrid(r, p)
 g_00 = np.exp(-R**2)
 
 X, Y = R*np.cos(P), R*np.sin(P)
+I = g_00**2
 
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
-ax.plot_surface(X, Y, g_00,cmap=cm.cividis)
+ax.plot_surface(X, Y, I,cmap=cm.cividis)
 fig.savefig('gb.png')
 plt.show()
