@@ -16,8 +16,10 @@ def pure_gaussian(w_0,k,z=0):
     X, Y = np.meshgrid(r, p)
     z_r = (k*w_0**2)/2
     w = w_0 * np.sqrt(1 + (z/z_r)**2)
-
-    g_00 = ((w_0/w) * np.exp(-(X**2 + Y**2)/w**2) *
-            np.exp(1j*(k*z + np.atan(z/z_r) +z*k*(X**2 + Y**2)/(z_r**2+z**2))))
+    N = (w_0/w) * np.exp(1j*(k*z + np.atan(z/z_r) +z*k*(X**2 + Y**2)/(z_r**2+z**2)))
+    
+    g_00 = N *  np.exp(-(X**2 + Y**2)/w**2) 
+            
     I = np.abs(g_00)**2
-    return X, Y, I, g_00, w_0
+    
+    return X, Y, I, g_00, w_0, k, z
