@@ -1,21 +1,34 @@
 import numpy as np
 from scipy.special import jv
 
-''' 
-parameters r_0, w_0 and v are meant to be changed with the constraint: r_0 >> w_0,
-where v is topological charge (and order) of the beam (bessel function),
-r_0 is radius and w_0 is thickness of the beam's fourier image (a ring)
-'''
+def bessel_gauss(w_0,k,k_tr,v=0,z=0):
 
-def bessel_gauss(r_0, w_0, v):
-
-    r = np.linspace(0., 7, 100)
+    r = np.linspace(0., 17, 100)
     p = np.linspace(0,2*np.pi,100)
-    R, P = np.meshgrid(r, p)
-    X, Y = R*np.cos(P), R*np.sin(P)
+    r, p = np.meshgrid(r, p)
+    x, y = r*np.cos(p), r*np.sin(p)
+    z *= 0.001
 
-    N =  (w_0**2/2) * np.exp(1j*v*(P-np.pi/2))
+    # Rayleigh diffraction length: depends on wavelength (wavenumber) and beam waist
+    z_R = (k*w_0**2)/2
 
-    E = N * np.exp(-(w_0*R/2)**2) * jv(v,R*r_0)
-    I = np.abs(E)**2
-    return X, Y, I, r_0, w_0, v, E
+    # beam wavefront radius of curvature
+    R = np.divide((z**2 +z_R**2), z)
+
+    # beam radius
+    w = w_0 * np.sqrt(1 + (z/z_R)**2)
+
+    # Gouy phase shift
+    gouy = np.atan(z/z_R)
+
+    # the point of these 2 rows is to make code look less messy
+    u =  (-1/w**2 + 1j*k/(2*R))*(r**2 + k_tr**2 * z**2 / k**2)
+    o =  k_tr*r/(1 + 1j*z/z_R)
+
+    # electric field amplitude(first row) and intensity(next row)
+    j_v = np.exp(1j*(k - k_tr**2/(2*k))*z - 1j*gouy) * jv(v, o) * np.exp(u)
+    i_bgb = np.abs(j_v)**2
+
+    return x, y, z, v, w_0, z_R, i_bgb, j_v
+
+
