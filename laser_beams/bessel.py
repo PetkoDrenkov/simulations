@@ -1,20 +1,18 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import cm
 from scipy.special import jv
 
-v = 1
-r_0 = 1
-r = np.linspace(0, 30, 5000)
-p = np.linspace(0, 2*np.pi, 5000)
-R, P = np.meshgrid(r, p)
 
-Z = jv(v,R*r_0)
-X, Y = R*np.cos(P), R*np.sin(P)
-I = Z**2
+def bessel(k,k_tr,v=0,z=0):
+    r = np.linspace(0, 100, 100)
+    p = np.linspace(0, 2*np.pi, 100)
+    r, p = np.meshgrid(r, p)
+    x, y = r*np.cos(p), r*np.sin(p)
 
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-ax.plot_surface(X, Y, I,cmap=cm.cividis)
-fig.savefig(f'bb_v={v}_r0={r_0}.png')
-plt.show()
+
+    j_v = np.exp(1j * np.sqrt(k**2 - k_tr**2) * z) * jv(v,r*k_tr)
+    i_b = np.abs(j_v)**2
+    return x, y, z, v, j_v, i_b
+
+
+
+
