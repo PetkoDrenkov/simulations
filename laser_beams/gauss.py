@@ -1,8 +1,6 @@
 import numpy as np
 """
-When setting inputs of the func, k and w_0 should be strictly positive.
-When using outputs of the func, they are ordered like in the return statement. For example:
-g = pure gaussian(4,5905249)
+output parameters:
 grid: x = g[0]; y = g[1]
 intensity: i_gb = g[2]
 amplitude: g_00 = g[3]
@@ -22,6 +20,7 @@ def pure_gaussian(w_0,k,z=0.):
     
     g_00 = ph * np.exp(-(x**2 + y**2)/w**2)
 
-    i_gb = np.abs(g_00)**2
+    i_g = np.abs(g_00)**2
     
-    return x, y, i_gb, g_00, w_0, k, z, w
+    return x, y, z, w, k, w_0, i_g, g_00
+
