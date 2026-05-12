@@ -1,13 +1,7 @@
 import numpy as np
 """
-output parameters:
-grid: x = g[0]; y = g[1]
-intensity: i_gb = g[2]
-amplitude: g_00 = g[3]
-radius of the waist: w_0 = g[4]
-wavenumber: (k = 2*pi/ wavelength): k = g[5]
-z-axis: z = g[6]
-beam radius: w = g[7]
+output parameters (g = pure_gaussian(chosen_argument_values)):
+grid: x = g[0]; y = g[1], z-axis: z = g[2], beam radius: w = g[3], wavenumber: k = g[4], waist: w_0 = g[5], intensity: i_g = g[6], amplitude: g_00 = g[7].
 """
 
 def pure_gaussian(w_0,k,z=0.):
